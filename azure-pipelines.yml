@@ -1,0 +1,34 @@
+# Xcode
+# Build, test, and archive an Xcode workspace on macOS.
+# Add steps that install certificates, test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xcode
+
+pool:
+  vmImage: 'macOS 10.13'
+
+steps:
+- task: Xcode@5
+  inputs:
+    actions: 'build'
+    scheme: ''
+    sdk: 'iphoneos'
+    configuration: 'Release'
+    xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
+    xcodeVersion: 'default' # Options: 8, 9, default, specifyPath
+- task: CondaEnvironment@1
+  inputs:
+    #createCustomEnvironment: # Optional
+    #environmentName: # Required when createCustomEnvironment == True
+    #packageSpecs: 'python=3' # Optional
+    #updateConda: # Optional
+    #installOptions: # Optional
+    #createOptions: # Optional
+    #cleanEnvironment: # Optional
+    createCustomEnvironment: False
+    packageSpecs: conda-build click jinja2 ruamel.yaml plumbum
+    installOptions: --channel conda-forge
+    updateConda: False
+- script: conda build folly
+      displayName: 'Conda build folly'
+- script: conda build mapd-core-cpu
+      displayName: 'Conda build mapd-core-cpu'
