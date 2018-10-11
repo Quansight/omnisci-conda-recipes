@@ -29,4 +29,4 @@ jobs:
           installOptions: --channel conda-forge
           updateConda: False
       - script: conda build mapd-core-cpu
-          displayName: 'Conda build mapd-core-cpu'
+        displayName: 'Conda build mapd-core-cpu'
