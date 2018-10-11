@@ -28,6 +28,6 @@ jobs:
           installOptions: --channel conda-forge
           updateConda: True
       - script: conda config --add channels conda-forge
-        display: 'Add conda-forge channel'
+        displayName: 'Add conda-forge channel'
       - script: conda build mapd-core-cpu
         displayName: 'Conda build mapd-core-cpu'
