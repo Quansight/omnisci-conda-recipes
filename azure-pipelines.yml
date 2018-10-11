@@ -11,10 +11,9 @@ jobs:
         inputs:
           actions: 'build'
           scheme: ''
-          sdk: 'iphoneos'
+          sdk: 'macosx10.13'
           configuration: 'Release'
-          xcWorkspacePath: '**/*.xcodeproj/project.xcworkspace'
-          xcodeVersion: 'default' # Options: 8, 9, default, specifyPath
+          xcodeVersion: '9' # Options: 8, 9, default, specifyPath
       - task: CondaEnvironment@1
         inputs:
           #createCustomEnvironment: # Optional
