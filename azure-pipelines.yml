@@ -26,6 +26,8 @@ jobs:
           createCustomEnvironment: False
           packageSpecs: conda-build
           installOptions: --channel conda-forge
-          updateConda: False
+          updateConda: True
+      - script: conda config --add channels conda-forge
+        display: 'Add conda-forge channel'
       - script: conda build mapd-core-cpu
         displayName: 'Conda build mapd-core-cpu'
