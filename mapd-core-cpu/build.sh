@@ -11,8 +11,9 @@ if [ $(uname) == Darwin ]; then
   export MACOSX_DEPLOYMENT_TARGET="10.9"
 fi
 
+export LDFLAGS="$LDFLAGS -L$PREFIX/lib"
 export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
-# export DYLD_LIBARY_PATH=$PREFIX/lib:$DYLD_LIBRARY_PATH
+export DYLD_LIBARY_PATH=$PREFIX/lib:$DYLD_LIBRARY_PATH
 export BOOST_INCLUDEDIR=$PREFIX/include
 
 cmake \
