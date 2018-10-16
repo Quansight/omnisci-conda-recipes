@@ -32,4 +32,4 @@ make ParserFiles
 make
 make install
 
-cp -R $RECIPE_DIR/systemd $PREFIX
+cp -R $SRC_DIR/systemd $PREFIX
