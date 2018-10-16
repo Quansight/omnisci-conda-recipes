@@ -31,3 +31,11 @@ jobs:
         displayName: 'Add conda-forge channel'
       - script: conda build mapd-core-cpu
         displayName: 'Conda build mapd-core-cpu'
+      - script: conda create --name mapd-core-cpu
+        displayName: 'Create mapd-core-cpu environment'
+      - script: source activate mapd-core-cpu
+        displayName: 'Activate mapd-core-cpu'
+      - script: conda install --use-local mapd-core-cpu
+        displayName: 'Install mapd-core-cpu'
+      - script: cd $CONDA_PREFIX/bin && cp mapd_initdb initdb
+        displayName: 'Copy mapd_initdb to initdb'
