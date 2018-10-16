@@ -27,6 +27,7 @@ cmake \
     -DENABLE_TESTS=on  \
     -DENABLE_FOLLY=off \
     -DCMAKE_C_COMPILER=$CC \
+    -DCMAKE_CXX_FLAGS=-stdlib=libc++ \
     -DCMAKE_CXX_COMPILER=$CXX ..
 
 make ParserFiles
