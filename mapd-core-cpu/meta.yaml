@@ -41,11 +41,6 @@ requirements:
     - libkml
     - thrift-cpp=0.11.0
     - thrift=0.11.0
-    # - bzip2
-    # - zlib
-    - libevent
-    - jemalloc
-    - libunwind
   run:
     - arrow-cpp=0.7.1
     - bisonpp

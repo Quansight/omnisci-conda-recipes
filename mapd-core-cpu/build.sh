@@ -9,12 +9,12 @@ if [ $(uname) == Darwin ]; then
   export CC=clang
   export CXX=clang++
   export MACOSX_DEPLOYMENT_TARGET="10.9"
+  
+  export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
+  # export DYLD_LIBARY_PATH=$PREFIX/lib:$DYLD_LIBRARY_PATH
+  export BOOST_INCLUDEDIR=$PREFIX/include
+  export LDFLAGS="-L$PREFIX/lib $LDFLAGS -Wl,-rpath,$PREFIX/lib"
 fi
-
-export LDFLAGS="$LDFLAGS -L$PREFIX/lib"
-export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
-export DYLD_LIBARY_PATH=$PREFIX/lib:$DYLD_LIBRARY_PATH
-export BOOST_INCLUDEDIR=$PREFIX/include
 
 cmake \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
@@ -27,7 +27,6 @@ cmake \
     -DENABLE_TESTS=on  \
     -DENABLE_FOLLY=off \
     -DCMAKE_C_COMPILER=$CC \
-    -DCMAKE_CXX_FLAGS=-stdlib=libc++ \
     -DCMAKE_CXX_COMPILER=$CXX ..
 
 make ParserFiles
