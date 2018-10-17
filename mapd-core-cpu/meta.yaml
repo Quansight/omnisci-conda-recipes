@@ -30,7 +30,7 @@ requirements:
     - boost-cpp=1.67
     - double-conversion
     - flex
-    # - folly
+    - folly
     - gperftools
     - gdal
     - glog
@@ -47,7 +47,7 @@ requirements:
     - boost-cpp=1.67
     - double-conversion
     - flex
-    # - folly
+    - folly
     - go
     - gperftools
     - gdal

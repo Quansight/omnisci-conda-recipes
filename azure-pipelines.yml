@@ -7,27 +7,13 @@ jobs:
     pool:
       vmImage: 'macOS 10.13'
     steps:
-      # - task: Xcode@5
-      #   inputs:
-      #     actions: 'build'
-      #     scheme: ''
-      #     sdk: 'macosx10.13'
-      #     configuration: 'Release'
-      #     xcodeVersion: '9' # Options: 8, 9, default, specifyPath
       - task: CondaEnvironment@1
         inputs:
-          #createCustomEnvironment: # Optional
-          #environmentName: # Required when createCustomEnvironment == True
-          #packageSpecs: 'python=3' # Optional
-          #updateConda: # Optional
-          #installOptions: # Optional
-          #createOptions: # Optional
-          #cleanEnvironment: # Optional
           createCustomEnvironment: False
           packageSpecs: conda-build
           installOptions: --channel conda-forge
           updateConda: True
-      - script: conda config --add channels conda-forge
+      - script: conda config --add channels conda-forge && conda config --add channels omnisci
         displayName: 'Add conda-forge channel'
       - script: conda build mapd-core-cpu
         displayName: 'Conda build mapd-core-cpu'
