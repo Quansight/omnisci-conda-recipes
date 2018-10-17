@@ -25,7 +25,6 @@ cmake \
     -DPREFER_STATIC_LIBS=off \
     -DENABLE_AWS_S3=off \
     -DENABLE_TESTS=on  \
-    -DENABLE_FOLLY=off \
     -DCMAKE_C_COMPILER=$CC \
     -DCMAKE_CXX_COMPILER=$CXX ..
 
