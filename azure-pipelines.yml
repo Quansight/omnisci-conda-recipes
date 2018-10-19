@@ -14,6 +14,8 @@ jobs:
           installOptions: --channel conda-forge
           updateConda: True
           environmentName: mapd-core-cpu
+      - script: sudo chown -R 501:20 /usr/local/miniconda/envs
+        displayName: 'CHANGE PERMISSIONS'
       - script: conda config --set always_yes True
         displayName: 'CONDA CONFIG ALWAYS YES'
       - script: conda config --add channels conda-forge && conda config --add channels omnisci
