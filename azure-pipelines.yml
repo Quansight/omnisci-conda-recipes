@@ -13,16 +13,17 @@ jobs:
           packageSpecs: conda-build
           installOptions: --channel conda-forge
           updateConda: True
+          environmentName: mapd-core-cpu
       - script: conda config --set always_yes True
         displayName: 'CONDA CONFIG ALWAYS YES'
       - script: conda config --add channels conda-forge && conda config --add channels omnisci
         displayName: 'ADD CONDA-FORGE CHANNEL'
       - script: conda build mapd-core-cpu
         displayName: 'CONDA BUILD MAPD-CORE-CPU'
-      - script: conda create --name mapd-core-cpu python=3.6
-        displayName: 'CREATE MAPD-CORE-CPU ENVIRONMENT'
-      - script: source activate mapd-core-cpu
-        displayName: 'ACTIVATE MAPD-CORE-CPU'
+      # - script: conda create --name mapd-core-cpu python=3.6
+      #  displayName: 'CREATE MAPD-CORE-CPU ENVIRONMENT'
+      # - script: source activate mapd-core-cpu
+      #   displayName: 'ACTIVATE MAPD-CORE-CPU'
       - script: conda install --use-local mapd-core-cpu
         displayName: 'INSTALL MAPD-CORE-CPU'
       - script: cd $CONDA_PREFIX/bin && cp mapd_initdb initdb
