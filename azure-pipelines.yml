@@ -14,26 +14,21 @@ jobs:
       - task: CondaEnvironment@1
         inputs:
           createCustomEnvironment: True
-          packageSpecs: conda-build python=$(python.version)
+          packageSpecs: conda-build python=$(python.version) anaconda-client
           installOptions: --channel conda-forge
           updateConda: True
           environmentName: mapd-core-cpu
-      - script: sudo chown -R 501:20 /usr/local/miniconda/envs
-        displayName: 'Change permission'
-      - script: conda config --set always_yes True
-        displayName: 'Conda config always yes'
-      - script: conda config --add channels conda-forge && conda config --add channels omnisci
-        displayName: 'Add conda-forge channel'
+      - script: |
+          sudo chown -R 501:20 /usr/local/miniconda/envs
+          conda config --set always_yes True
+          conda config --add channels conda-forge
+          conda config --add channels omnisci
+        displayName: 'Conda config'
       - script: conda build mapd-core-cpu
         displayName: 'Conda build mapd-core'
+      - script: anaconda -t $(ANACONDA_TOKEN) --user $(ANACONDA_USER) upload /usr/local/miniconda/conda-bld/**/mapd-core-cpu-*.tar.bz2
+        displayName: 'Upload mapd-core-package'
 
-      # publish sdist and wheel and conda package
-      - task: PublishBuildArtifacts@1
-        displayName: 'Publish conda package to Azure'
-        inputs:
-          pathToPublish: conda
-          artifactName: conda
-     
   - job: install mapd-core
     pool:
       vmImage: 'macOS 10.13'
@@ -49,14 +44,13 @@ jobs:
           installOptions: --channel conda-forge
           updateConda: True
           environmentName: mapd-core-cpu
-      - script: sudo chown -R 501:20 /usr/local/miniconda/envs
-        displayName: 'Change permission'
-      - script: conda config --set always_yes True
-        displayName: 'Conda config always yes'
-      - script: conda config --add channels conda-forge && \
-                conda config --add channels quansight && \
-                conda config --add channels omnisci
-        displayName: 'Conda config channels'
+      - script: |
+          sudo chown -R 501:20 /usr/local/miniconda/envs
+          conda config --set always_yes True
+          conda config --add channels conda-forge
+          conda config --add channels quansight
+          conda config --add channels omnisci
+        displayName: 'Conda config'
       - script: conda install -c quansight mapd-core-cpu
         displayName: 'INSTALL MAPD-CORE-CPU'
       - script: cd $CONDA_PREFIX/bin && cp mapd_initdb initdb
