@@ -29,7 +29,7 @@ jobs:
       - script: anaconda -t $(ANACONDA_TOKEN) --user $(ANACONDA_USER) upload /usr/local/miniconda/conda-bld/**/mapd-core-cpu-*.tar.bz2
         displayName: 'Upload mapd-core-package'
 
-  - job: install mapd-core
+  - job: install_mapd_core
     pool:
       vmImage: 'macOS 10.13'
     strategy:
