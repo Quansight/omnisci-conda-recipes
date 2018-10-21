@@ -26,7 +26,10 @@ jobs:
         displayName: 'Conda config'
       - script: conda build mapd-core-cpu
         displayName: 'Conda build mapd-core'
-      - script: anaconda upload -t $(ANACONDA_TOKEN) --user $(ANACONDA_USER) /usr/local/miniconda/envs/mapd-core-cpu/conda-bld/osx-64/mapd-core-cpu-*.tar.bz2
+      - script: |
+          anaconda --token $(ANACONDA_TOKEN) \
+            upload --user $(ANACONDA_USER) --label $(ANACONDA_LABEL) \
+            /usr/local/miniconda/envs/mapd-core-cpu/conda-bld/**/mapd-core-cpu-*.tar.bz2
         displayName: 'Upload mapd-core-package'
 
   - job: install_mapd_core
@@ -51,7 +54,7 @@ jobs:
           conda config --add channels quansight
           conda config --add channels omnisci
         displayName: 'Conda config'
-      - script: conda install -c quansight mapd-core-cpu
+      - script: conda install -c quansight/label/$(ANACONDA_LABEL) mapd-core-cpu
         displayName: 'INSTALL MAPD-CORE-CPU'
       - script: cd $CONDA_PREFIX/bin && cp mapd_initdb initdb
         displayName: 'COPY MAPD_INITDB AS INITDB'
