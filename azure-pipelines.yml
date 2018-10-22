@@ -65,5 +65,5 @@ jobs:
           ./install_mapd_systemd.sh
         displayName: 'INSTALL MAPD SYSTEMD'
       - script: systemctl start mapd_server
-        displayName: 'START MAPD SERVER'
+        displayName: 'Start MapD server'
 
