@@ -32,4 +32,5 @@ make ParserFiles
 make
 make install
 
+cp $PREFIX/bin/initdb $PREFIX/bin/mapd_initdb
 cp -R $SRC_DIR/systemd $PREFIX
