@@ -59,7 +59,7 @@ jobs:
       - script: |
           cd $CONDA_PREFIX/bin
           cp mapd_initdb initdb
-        displayName: 'COPY MAPD_INITDB AS INITDB'
+        displayName: 'Copy mapd_initdb as initdb'
       - script: |
           cd $CONDA_PREFIX/systemd
           ./install_mapd_systemd.sh
