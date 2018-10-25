@@ -62,7 +62,7 @@ jobs:
           cp mapd_initdb initdb
           cd $CONDA_PREFIX/systemd
           /usr/bin/env bash --version
-          sed -i'' -e 's/\/bin\/bash/\/usr\/bin\/env bash\nset -ex\n/g' install_mapd_systemd.sh
+          sed -i'' -e 's/\/bin\/bash/\/usr\/bin\/env bash/g' install_mapd_systemd.sh
           echo '==================================================================='
           cat install_mapd_systemd.sh
           echo '==================================================================='
