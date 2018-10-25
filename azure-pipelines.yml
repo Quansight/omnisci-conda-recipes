@@ -61,7 +61,7 @@ jobs:
           cd $CONDA_PREFIX/bin
           cp mapd_initdb initdb
           cd $CONDA_PREFIX/systemd
-          sed -i 's/\/bin\/bash/\/usr\/bin\/env bash/g' install_mapd_systemd.sh
+          sed -i'' -e 's/\/bin\/bash/\/usr\/bin\/env bash/g' install_mapd_systemd.sh
           ./install_mapd_systemd.sh
         displayName: 'Install MapD service and server'
       - script: systemctl start mapd_server
