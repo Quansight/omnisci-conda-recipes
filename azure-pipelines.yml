@@ -51,18 +51,22 @@ jobs:
           sudo chown -R 501:20 /usr/local/miniconda/envs
           conda config --set always_yes True
           conda config --add channels conda-forge
-          conda config --add channels quansight
+          conda config --add channels $(ANACONDA_USER)
           conda config --add channels omnisci
-          conda install bash
         displayName: 'Conda config'
-      - script: conda install -c quansight/label/$(ANACONDA_LABEL) mapd-core-cpu
+      - script: conda install -c $(ANACONDA_USER)/label/$(ANACONDA_LABEL) mapd-core-cpu
         displayName: 'INSTALL MAPD-CORE-CPU'
       - script: |
+          conda install bash
           cd $CONDA_PREFIX/bin
           cp mapd_initdb initdb
           cd $CONDA_PREFIX/systemd
           sed -i'' -e 's/\/bin\/bash/\/usr\/bin\/env bash/g' install_mapd_systemd.sh
+          echo '==================================================================='
+          cat install_mapd_systemd.sh
+          echo '==================================================================='
           ./install_mapd_systemd.sh
+          conda uninstall bash
         displayName: 'Install MapD service and server'
       - script: systemctl start mapd_server
         displayName: 'Start MapD server'
