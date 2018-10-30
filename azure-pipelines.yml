@@ -27,8 +27,8 @@ jobs:
       - script: conda build mapd-core-cpu
         displayName: 'Conda build mapd-core'
       - script: |
-          anaconda --token $(ANACONDA_TOKEN) \
-            upload --user $(ANACONDA_USER) --label $(ANACONDA_LABEL) \
+          anaconda --token "$ANACONDA_TOKEN" \
+            upload --user "$ANACONDA_USER" --label "$ANACONDA_LABEL" \
             /usr/local/miniconda/envs/mapd-core-cpu/conda-bld/**/mapd-core-cpu-*.tar.bz2
         displayName: 'Upload mapd-core-package'
 
@@ -51,10 +51,10 @@ jobs:
           sudo chown -R 501:20 /usr/local/miniconda/envs
           conda config --set always_yes True
           conda config --add channels conda-forge
-          conda config --add channels $(ANACONDA_USER)
+          conda config --add channels "$ANACONDA_USER"
           conda config --add channels omnisci
         displayName: 'Conda config'
-      - script: conda install -c $(ANACONDA_USER)/label/$(ANACONDA_LABEL) mapd-core-cpu
+      - script: conda install -c "$ANACONDA_USER"/label/"$ANACONDA_LABEL" mapd-core-cpu
         displayName: 'INSTALL MAPD-CORE-CPU'
       - script: |
           conda install bash
