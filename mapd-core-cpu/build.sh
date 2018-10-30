@@ -32,5 +32,6 @@ make ParserFiles
 make
 make install
 
+# copy initdb to mapd_initdb to avoid conflict with psql initdb
 cp $PREFIX/bin/initdb $PREFIX/bin/mapd_initdb
 cp -R $SRC_DIR/systemd $PREFIX
