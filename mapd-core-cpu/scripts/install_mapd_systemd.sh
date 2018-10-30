@@ -16,9 +16,9 @@ descs["MAPD_STORAGE"]="MapD data and configuration storage directory"
 vars["MAPD_STORAGE"]=${MAPD_STORAGE:="$CONDA_PREFIX/var/lib/mapd"}
 
 descs["MAPD_USER"]="user MapD will be run as"
-vars["MAPD_USER"]=${MAPD_USER:=$(id --user --name)}
+vars["MAPD_USER"]=${MAPD_USER:=$(whoami)}
 descs["MAPD_GROUP"]="group MapD will be run as"
-vars["MAPD_GROUP"]=${MAPD_GROUP:=$(id --group --name)}
+vars["MAPD_GROUP"]=${MAPD_GROUP:=$(groups $(whoami) | cut -d' ' -f1)}
 
 for v in MAPD_PATH MAPD_STORAGE MAPD_USER MAPD_GROUP ; do
   echo "$v: ${descs["$v"]}"
