@@ -82,4 +82,4 @@ fi
 sudo cp $MAPD_TMP/mapd.conf ${vars['MAPD_STORAGE']}
 sudo chown ${vars['MAPD_USER']}:${vars['MAPD_GROUP']} "${vars['MAPD_STORAGE']}/mapd.conf"
 
-sudo systemctl daemon-reload
+# sudo systemctl daemon-reload
