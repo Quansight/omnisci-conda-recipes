@@ -19,7 +19,8 @@ jobs:
           updateConda: True
           environmentName: mapd-core-cpu
       - script: |
-          sudo chown -R 501:20 /usr/local/miniconda/envs
+          export CONDA_ROOT=$(dirname $(dirname $CONDA_EXE))
+          sudo chown -R 501:20 $CONDA_ROOT/envs
           conda config --set always_yes True
           conda config --add channels conda-forge
           conda config --add channels omnisci
@@ -27,9 +28,10 @@ jobs:
       - script: conda build mapd-core-cpu
         displayName: 'Conda build mapd-core'
       - script: |
+          export CONDA_ROOT=$(dirname $(dirname $CONDA_EXE))
           anaconda --token "$ANACONDA_TOKEN" \
             upload --user "$ANACONDA_USER" --label "$ANACONDA_LABEL" \
-            /usr/local/miniconda/envs/mapd-core-cpu/conda-bld/**/mapd-core-cpu-*.tar.bz2
+            $CONDA_ROOT/conda-bld/**/mapd-core-cpu-*.tar.bz2
         displayName: 'Upload mapd-core-package'
 
   - job: install_mapd_core
@@ -48,7 +50,8 @@ jobs:
           updateConda: True
           environmentName: mapd-core-cpu
       - script: |
-          sudo chown -R 501:20 /usr/local/miniconda/envs
+          export CONDA_ROOT=$(dirname $(dirname $CONDA_EXE))
+          sudo chown -R 501:20 "$CONDA_ROOT/envs"
           conda config --set always_yes True
           conda config --add channels conda-forge
           conda config --add channels "$ANACONDA_USER"
@@ -59,15 +62,11 @@ jobs:
       - script: |
           conda install bash
           /usr/bin/env bash --version
-          cd $CONDA_PREFIX/bin
-          cp mapd_initdb initdb
-          cd $CONDA_PREFIX/systemd
-          ls "$BUILD_SOURCESDIRECTORY"
-          cp "$BUILD_SOURCESDIRECTORY"/mapd-core-cpu/scripts/install_mapd_systemd.sh "$CONDA_PREFIX"/systemd/
-          chmod +x "$CONDA_PREFIX"/systemd/install_mapd_systemd.sh
-          ./install_mapd_systemd.sh
+          cd $CONDA_PREFIX
+          chmod +x "${CONDA_PREFIX}/mapd-install.sh"
+          ./mapd-install.sh
           conda uninstall bash
         displayName: 'Install MapD service and server'
-      - script: systemctl start mapd_server
+      - script: $CONDA_PREFIX/bin/mapd_server --config "$CONDA_PREFIX/data/mapd.conf"
         displayName: 'Start MapD server'
 

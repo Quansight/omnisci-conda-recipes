@@ -24,6 +24,7 @@ cmake \
     -DMAPD_DOCS_DOWNLOAD=off \
     -DPREFER_STATIC_LIBS=off \
     -DENABLE_AWS_S3=off \
+    -DENABLE_FOLLY=off \
     -DENABLE_TESTS=on  \
     -DCMAKE_C_COMPILER=$CC \
     -DCMAKE_CXX_COMPILER=$CXX ..
@@ -35,3 +36,4 @@ make install
 # copy initdb to mapd_initdb to avoid conflict with psql initdb
 cp $PREFIX/bin/initdb $PREFIX/bin/mapd_initdb
 cp -R $SRC_DIR/systemd $PREFIX
+cp $RECIPE_DIR/scripts/mapd-install.sh $PREFIX
