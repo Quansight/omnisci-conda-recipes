@@ -34,6 +34,7 @@ jobs:
         displayName: 'Upload mapd-core-package'
 
   - job: install_mapd_core
+    dependsOn: build_mapd_core_cpu
     pool:
       vmImage: 'macOS 10.13'
     strategy:
