@@ -64,9 +64,12 @@ jobs:
           /usr/bin/env bash --version
           cd $CONDA_PREFIX
           chmod +x "${CONDA_PREFIX}/mapd-install.sh"
+          source ${CONDA_PREFIX}/mapd-env.sh
           ./mapd-install.sh
           conda uninstall bash
         displayName: 'Install MapD service and server'
-      - script: $CONDA_PREFIX/bin/mapd_server --config "$CONDA_PREFIX/data/mapd.conf"
+      - script: |
+          source ${CONDA_PREFIX}/mapd-env.sh
+          ${CONDA_PREFIX}/bin/mapd_server --config "${CONDA_PREFIX}/data/mapd.conf"
         displayName: 'Start MapD server'
 
