@@ -19,7 +19,8 @@ jobs:
           updateConda: True
           environmentName: mapd-core-cpu
       - script: |
-          export CONDA_ROOT=$(dirname $(dirname $CONDA_EXE))
+          env
+          export CONDA_ROOT=/Users/vsts/.conda
           sudo chown -R 501:20 $CONDA_ROOT/envs
           conda config --set always_yes True
           conda config --add channels conda-forge
@@ -28,7 +29,7 @@ jobs:
       - script: conda build mapd-core-cpu
         displayName: 'Conda build mapd-core'
       - script: |
-          export CONDA_ROOT=$(dirname $(dirname $CONDA_EXE))
+          export CONDA_ROOT=/Users/vsts/.conda
           anaconda --token "$ANACONDA_TOKEN" \
             upload --user "$ANACONDA_USER" --label "$ANACONDA_LABEL" \
             $CONDA_ROOT/conda-bld/**/mapd-core-cpu-*.tar.bz2
@@ -50,7 +51,7 @@ jobs:
           updateConda: True
           environmentName: mapd-core-cpu
       - script: |
-          export CONDA_ROOT=$(dirname $(dirname $CONDA_EXE))
+          export CONDA_ROOT=/Users/vsts/.conda
           sudo chown -R 501:20 "$CONDA_ROOT/envs"
           conda config --set always_yes True
           conda config --add channels conda-forge
