@@ -17,10 +17,10 @@ if [ $(uname) == Darwin ]; then
 elif [[ $(uname) == 'Linux' ]]; then
   export CC=clang
   export CXX=clang++
-
+  export CXXFLAGS="-std=c++14 -D_GLIBCXX_USE_CXX11_ABI=0"
+  export LDFLAGS="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib"
   export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
   export BOOST_INCLUDEDIR=$PREFIX/include
-  export LDFLAGS="-L$PREFIX/lib $LDFLAGS -Wl,-rpath,$PREFIX/lib"
 fi
 
 cmake \
