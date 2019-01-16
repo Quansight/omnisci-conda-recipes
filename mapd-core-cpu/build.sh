@@ -35,5 +35,8 @@ make install
 
 # copy initdb to mapd_initdb to avoid conflict with psql initdb
 cp $PREFIX/bin/initdb $PREFIX/bin/mapd_initdb
+# copy extra files for installation
 cp -R $SRC_DIR/systemd $PREFIX
 cp $RECIPE_DIR/scripts/mapd-install.sh $PREFIX
+cp $RECIPE_DIR/scripts/mapd-env.sh $PREFIX
+
