@@ -11,54 +11,75 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 3
+  number: 4
   skip: True  # [win]
 
 requirements:
   build:
-    - cmake
+    - {{ compiler('c') }}  # [linux]
+    - {{ compiler('cxx') }}  # [linux]
+    - arrow-cpp=0.11.0
+    - bisonpp
+    - blosc
+    - boost-cpp=1.67
+    # - boost=1.67  # [linux]
     - clangdev=6
-    - llvmdev=6
+    # - cython  # [linux]
+    - double-conversion
+    # - doxygen
+    - flex
+    - gdal
+    - gflags
     - git
-    - go
-    - openjdk=8
-    - maven
-    - wget
-    - arrow-cpp=0.10.0
-    - bisonpp
-    - boost-cpp=1.67
-    - double-conversion
-    - flex
-    - gperftools
-    - gdal
     - glog
-    - gflags
-    - openssl
+    - go
+    - gperftools
     - libarchive
-    - libpng
     - libkml
-    - thrift-cpp=0.11.0
-    - thrift=0.11.0
-  run:
-    - arrow-cpp=0.10.0
-    - bisonpp
-    - boost-cpp=1.67
-    - double-conversion
-    - flex
-    - go
-    - gperftools
-    - gdal
-    - glog
-    - gflags
-    - openjdk=8
-    - openssl
-    - maven
-    - libarchive
     - libpng
     - llvmdev=6
-    - libkml
+    - maven
+    # - numba>=0.40  # [linux]
+    # - numpy>=1.14  # [linux]
+    - openjdk=8
+    - openssl
+    - parquet-cpp
+    - pyarrow=0.11.0
+    # - python=3.6
     - thrift-cpp=0.11.0
-
+    # - thrift=0.11.0
+    - wget
+  run:
+    - arrow-cpp=0.11.0
+    - bisonpp
+    - blosc
+    - boost-cpp=1.67
+    # - boost=1.67  # [linux]
+    - clangdev=6
+    # - cython  # [linux]
+    - double-conversion
+    # - doxygen
+    - flex
+    - gdal
+    - gflags
+    # - git
+    - glog
+    - go
+    - gperftools
+    - libarchive
+    - libkml
+    - libpng
+    - llvmdev=6
+    - maven
+    # - numba>=0.40  # [linux]
+    # - numpy>=1.14  # [linux]
+    - openjdk=8
+    - openssl
+    - parquet-cpp
+    - pyarrow=0.11.0
+    - python=3.6
+    - thrift-cpp=0.11.0
+    # - thrift=0.11.0
 about:
   home: https://www.mapd.com/
   license: Apache-2.0

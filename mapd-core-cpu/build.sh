@@ -6,17 +6,16 @@ mkdir -p build
 cd build
 
 if [ $(uname) == Darwin ]; then
-  export CC=clang
-  export CXX=clang++
+  export CMAKE_COMPILERS="-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++"
   export MACOSX_DEPLOYMENT_TARGET="10.9"
-  
+  export CXXFLAGS="-std=c++14 -D_GLIBCXX_USE_CXX11_ABI=0"
   export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
   export DYLD_LIBARY_PATH=$PREFIX/lib:$DYLD_LIBRARY_PATH
   export BOOST_INCLUDEDIR=$PREFIX/include
   export LDFLAGS="-L$PREFIX/lib $LDFLAGS -Wl,-rpath,$PREFIX/lib"
-elif [[ $(uname) == 'Linux' ]]; then
-  export CC=clang
-  export CXX=clang++
+elif [[ $(uname) == Linux ]]; then
+  # export CMAKE_COMPILERS=""
+  export CMAKE_COMPILERS="-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++"
   export CXXFLAGS="-std=c++14 -D_GLIBCXX_USE_CXX11_ABI=0"
   export LDFLAGS="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib"
   export LD_LIBRARY_PATH=$PREFIX/lib:$LD_LIBRARY_PATH
@@ -33,8 +32,8 @@ cmake \
     -DENABLE_AWS_S3=off \
     -DENABLE_FOLLY=off \
     -DENABLE_TESTS=on  \
-    -DCMAKE_C_COMPILER=$CC \
-    -DCMAKE_CXX_COMPILER=$CXX ..
+    $CMAKE_COMPILERS \
+    ..
 
 make ParserFiles
 make
