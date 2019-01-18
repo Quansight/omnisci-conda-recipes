@@ -24,9 +24,10 @@ requirements:
     - boost-cpp=1.67
     # - boost=1.67  # [linux]
     - clangdev=6
+    - cmake
     # - cython  # [linux]
     - double-conversion
-    # - doxygen
+    - doxygen
     - flex
     - gdal
     - gflags
@@ -45,9 +46,9 @@ requirements:
     - openssl
     - parquet-cpp
     - pyarrow=0.11.0
-    # - python=3.6
+    - python=3.6
     - thrift-cpp=0.11.0
-    # - thrift=0.11.0
+    - thrift=0.11.0
     - wget
   run:
     - arrow-cpp=0.11.0
@@ -70,7 +71,7 @@ requirements:
     - libkml
     - libpng
     - llvmdev=6
-    - maven
+    # - maven
     # - numba>=0.40  # [linux]
     # - numpy>=1.14  # [linux]
     - openjdk=8
@@ -79,7 +80,7 @@ requirements:
     - pyarrow=0.11.0
     - python=3.6
     - thrift-cpp=0.11.0
-    # - thrift=0.11.0
+    - thrift=0.11.0
 about:
   home: https://www.mapd.com/
   license: Apache-2.0
